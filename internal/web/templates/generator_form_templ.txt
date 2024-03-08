@@ -1,0 +1,8 @@
+<form action=\"/generate\" method=\"post\"><fieldset><legend>Content Packs</legend> 
+<label><input type=\"checkbox\" checked name=\"packs\" value=\"
+\"> 
+</label>
+<label><input type=\"checkbox\" name=\"packs\" value=\"
+\"> 
+</label>
+</fieldset><label><input type=\"checkbox\" name=\"forbidmultirace\" value=\"true\"> Forbid Multi Race Factions </label> <label for=\"dungeonsize\">Dungeon Size:</label> <select name=\"dungeonsize\" id=\"dungeonsize\"><option value=\"1\">Small</option> <option value=\"2\">Medium</option> <option value=\"3\">Large</option> <option value=\"4\">Greater</option> <option value=\"5\">Mega</option></select> <label for=\"techlevel\">Tech Level:</label> <select name=\"techlevel\" id=\"techlevel\"><option value=\"1\">Pre-Primitive</option> <option value=\"2\">Primitive</option> <option value=\"3\">Medieval</option> <option value=\"4\">Modern</option> <option value=\"5\">Futuristic</option></select> <label for=\"magiclevel\">Magic Level:</label> <select name=\"magiclevel\" id=\"magiclevel\"><option value=\"1\">None</option> <option value=\"2\">Low</option> <option value=\"3\">Medium</option> <option value=\"4\">High</option> <option value=\"5\">Epic</option></select> <label for=\"aggressionlevel\">Average Aggression:</label> <select name=\"aggressionlevel\" id=\"aggressionlevel\"><option value=\"1\">Peaceful</option> <option value=\"2\">Neutral</option> <option value=\"3\">Aggressive</option> <option value=\"4\">Hostile</option> <option value=\"5\">Warlike</option></select> <input type=\"submit\" value=\"Generate\"></form>

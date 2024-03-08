@@ -1,0 +1,64 @@
+version: "3"
+
+tasks:
+
+  # --------------------------------
+  #     LOCAL DEVELOPMENT
+  # --------------------------------
+
+  templ:
+    cmds:
+      - templ generate
+
+  dev:
+    cmds:
+      - echo "Running webserver through a development proxy. Access http://127.0.0.1:7331 for live reload."
+      - templ generate --watch --proxy=http://127.0.0.1:3131 --cmd="go run cmd/webserver/main.go"
+    env:
+      PORT: 3131
+
+  local-webserver:
+    cmds:
+      - docker build . -t factions-webserver -f "Dockerfile"
+      - defer: docker stop factions-webserver && docker rm factions-webserver
+      - docker run --name factions-webserver -p 8080:8080 -e RUN_LOCAL=true factions-webserver
+
+  # --------------------------------
+  #     DEPLOYMENT
+  # --------------------------------
+
+  gcloud-setup:
+    cmds:
+      - gcloud auth login
+      - gcloud config set project "{{.PROJECT_ID}}"
+      - gcloud auth configure-docker
+    vars:
+      PROJECT_ID: TODO
+
+  deploy-webserver:
+    cmds:
+      - docker build -f Dockerfile -t "gcr.io/{{.PROJECT_ID}}/webserver" .
+      - docker push "gcr.io/{{.PROJECT_ID}}/webserver"
+      - gcloud run deploy webserver
+        --image "gcr.io/{{.PROJECT_ID}}/webserver"
+        --platform managed
+        --allow-unauthenticated
+        --region "{{.REGION}}"
+    vars:
+      PROJECT_ID: TODO
+      REGION: europe-west1
+
+  # --------------------------------
+  #     TESTING
+  # --------------------------------
+
+  test:
+    cmds:
+      - go test -v ./...
+
+  # --------------------------------
+  # INTERNAL TASKS, NOT FOR RUNNING
+  # --------------------------------
+  # ...
+  # ...
+  # ...
