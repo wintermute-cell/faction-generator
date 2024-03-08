@@ -33,7 +33,7 @@ tasks:
       - gcloud config set project "{{.PROJECT_ID}}"
       - gcloud auth configure-docker
     vars:
-      PROJECT_ID: TODO
+      PROJECT_ID: faction-generator
 
   deploy-webserver:
     cmds:
@@ -45,7 +45,7 @@ tasks:
         --allow-unauthenticated
         --region "{{.REGION}}"
     vars:
-      PROJECT_ID: TODO
+      PROJECT_ID: faction-generator
       REGION: europe-west1
 
   # --------------------------------
